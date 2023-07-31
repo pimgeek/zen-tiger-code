@@ -1,7 +1,4 @@
 #!/bin/sh
-# 模仿 Excel 中的 VLOOKUP 函数，具体功能如下
-#
-# !!特别注意!!：如果 ref 文件中的第一列“名字”有重复项，将以后出现的“名字”对应的“编码”为准
 
 if [ $# -ne 2 ]; then
   echo "\n使用方法: vlookup src ref"
