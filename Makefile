@@ -23,8 +23,8 @@ all: ./tmp/freq.txt ./tmp/root-cnt.txt ./tmp/1z1c.txt ./tmp/1z3c.txt ./tmp/mr2c.
 	egrep "^.\t[a-z]{3}\t" ./source/tiger-code-rime-dict.txt | awk '{ print $$1 "\t" $$2 }' > ./tmp/1z3c.txt
 
 # 生成主根及其编码对应表（自动过滤无法独立成字的字根及其编码）
-./tmp/mr2c.txt: ./script/vlookupext.sh ./source/tiger-241-main-root.txt ./tmp/freq.txt 
-	./script/vlookupext.sh ./source/tiger-241-main-root.txt ./tmp/freq.txt | egrep -v "\-\-\-" | awk '{ print $$1 "\t" $$2 }' > ./tmp/mr2c.txt
+./tmp/mr2c.txt: ./script/vlookupext.sh ./source/tiger-root-variants.txt ./tmp/freq.txt 
+	./script/vlookupext.sh ./source/tiger-root-variants.txt ./tmp/freq.txt | egrep -v "\-\-\-" | awk '{ print $$1 "\t" $$2 }' > ./tmp/mr2c.txt
 
 # 生成 3 码定长字根字及其编码对应表
 ./tmp/1z1r3c.txt: ./script/vlookup.sh ./script/vlookupext.sh ./source/tiger-code-rime-dict.txt ./source/tiger-3c-root-char.txt ./tmp/1z3c.txt ./tmp/freq.txt
