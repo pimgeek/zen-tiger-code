@@ -4,11 +4,15 @@ clean:
 	rm -f ./tmp/* ./dist/*
 
 # 生成所有构建目标
-all: ./tmp/freq.txt ./tmp/1z1c.txt ./tmp/1z3c.txt ./tmp/mr2c.txt ./tmp/1z1r3c.txt
+all: ./tmp/freq.txt ./tmp/root-cnt.txt ./tmp/1z1c.txt ./tmp/1z3c.txt ./tmp/mr2c.txt ./tmp/1z1r3c.txt
 
 # 生成虎码码表中所有单字的优先顺序表（很可能代表字频）
 ./tmp/freq.txt: ./source/tiger-code-rime-dict.txt
 	sort -k3,3n ./source/tiger-code-rime-dict.txt | awk 'BEGIN {FS=OFS="\t"} NR==FNR {freq[$$1]=$$3; next} END {for (z in freq) {print z, freq[z]}}' | sort -k2,2nr > ./tmp/freq.txt
+
+# 生成单字根数统计表
+./tmp/root-cnt.txt: ./source/cn-char-tiger-breakdown.txt
+	awk -F '[\t〔 ·]+' '{gsub(/./, "%", $$2) ; print $$1 "\t" length($$2)}' ./source/cn-char-tiger-breakdown.txt > ./tmp/root-cnt.txt
 
 # 生成一简字及其编码对应表
 ./tmp/1z1c.txt: ./source/tiger-code-rime-dict.txt
