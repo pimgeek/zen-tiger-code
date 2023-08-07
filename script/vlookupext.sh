@@ -8,6 +8,6 @@ if [ $# -ne 2 ]; then
 else
   SRC=$1
   REF=$2
-  awk 'BEGIN {FS=OFS="\t"} NR==FNR {a[$1]=$2; next} {if ($1 in a) {print $1, $2, a[$1]} else {print $1, $2, "---"}}' $REF $SRC
+  awk 'BEGIN {FS=OFS="\t"} NR==FNR {a[$1]=$2; next} {if ($1 in a) {print $1, $2, a[$1]} else {print $1, $2, "%%%"}}' $REF $SRC
 fi
 
