@@ -63,8 +63,9 @@ $(freq): $(tigerdict)
 	sort -k3,3n $(tigerdict) | awk 'BEGIN {FS=OFS="\t"} NR==FNR {freq[$$1]=$$3; next} END {for (z in freq) {print z, freq[z]}}' | sort -k2,2nr > $(freq)
 
 # 生成虎码码表中前 6500 个单字及字频的优先顺序表
-$(f6500): $(freq)
+$(f6500): $(freq) $(3c1rchars)
 	head -n 6500 $(freq) > $(f6500)
+	awk '{print $$1 "\t" 257 }' $(3c1rchars) >> $(f6500)
 
 # 生成单字根数统计表
 $(rcnt): $(breakdown)
